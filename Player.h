@@ -31,7 +31,8 @@ public:
 	~Player()
 	{
 	}
-	const std::vector<Dice>& getDices() { return m_dices; }
+	std::vector<Dice>& getDices() { return m_dices; }
+	const std::vector<Dice>& getDices() const { return m_dices; }
 };
 
 #endif //PLAYER_H
