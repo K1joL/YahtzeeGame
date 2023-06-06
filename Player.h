@@ -2,6 +2,8 @@
 #define PLAYER_H
 
 #include <vector>
+#include <random>
+#include <time.h>
 
 class Player
 {
@@ -12,11 +14,14 @@ class Player
 	public:
 		Dice(int top) : m_top{top}
 		{
+			//Random number generator for roll()
+			srand((unsigned)time(NULL));
 		}
 		~Dice() {}
 		int getTop() const { return m_top; }
 		bool isKeeped() const { return m_isKeeped; }
 		void keep() { m_isKeeped = true; }
+		void roll();
 	};
 
 private:
