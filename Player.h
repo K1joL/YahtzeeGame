@@ -21,6 +21,7 @@ class Player
 		int getTop() const { return m_top; }
 		bool isKeeped() const { return m_isKeeped; }
 		void keep() { m_isKeeped = true; }
+		void unkeep() { m_isKeeped = false; }
 		void roll();
 	};
 
@@ -38,6 +39,7 @@ public:
 	}
 	std::vector<Dice>& getDices() { return m_dices; }
 	const std::vector<Dice>& getDices() const { return m_dices; }
+	void unkeepAll();
 };
 
 #endif //PLAYER_H
