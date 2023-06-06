@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void Game::showDices(Player &p)
+void Game::showDices(const Player &p) const
 {
 	int index = 1;
 	for (auto &dice : p.getDices())
@@ -13,6 +13,15 @@ void Game::showDices(Player &p)
 			cout << "keeped";
 		cout << endl;
 		index++;
+	}
+}
+
+void Game::keepDice(Player &p, const std::string &diceNumber)
+{
+	for (int i = 0; i < diceNumber.length(); i++)
+	{
+		int diceIndex = diceNumber[i] - '0';
+		p.getDices()[diceIndex].keep();
 	}
 }
 
