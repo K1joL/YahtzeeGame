@@ -13,6 +13,7 @@ public:
 	}
 	void showDices(const Player &p) const;
 	void keepDice(Player &p, const std::string &diceNumber);
+	void rollDices(Player &p);
 };
 
 #endif //GAME_H
