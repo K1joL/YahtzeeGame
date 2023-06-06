@@ -1,5 +1,4 @@
 #include "Game.h"
-#include <iostream>
 
 using namespace std;
 
@@ -33,10 +32,15 @@ void Game::rollDices(Player &p)
 			dice.roll();
 }
 
-Game::Game()
+void Game::showCombos()
 {
-	Player p1, p2;
-	cout << "To start the game enter \"roll dice\"" << endl;
-		showDices(p1);
+	cout << setw(22) << left << "Uppper section combos:" << "Lower section combos:" << endl;
+	cout << setw(22) << left << "Ones (O)"	<< "Three of a kind (Tk)" << endl
+		<< setw(22) << left << "Twos (Tw)"	<< "Four of a kind (Fk)" << endl
+		<< setw(22) << left << "Three (Th)" << "Full house (Fh)" << endl
+		<< setw(22) << left << "Fours (Fr)" << "Small straight (Ss)" << endl
+		<< setw(22) << left << "Fives (Fv)" << "Large straight (Ls)" << endl
+		<< setw(22) << left << "Sixes (S)"	<< "Chance (Ch)" << endl
+						<< setw(22) << left << "YAHTZEE (Y)" << endl;
 
 }
