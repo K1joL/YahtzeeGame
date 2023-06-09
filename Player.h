@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include <vector>
+#include <map>
 #include <random>
 #include <time.h>
 
@@ -25,21 +26,34 @@ class Player
 		void roll();
 	};
 
+	struct Score
+	{
+		int score = 0;
+		bool isFilled = false;
+	};
 private:
 	std::vector<Dice> m_dices;
+	std::map<std::string, Score> m_scoreTable;
+	int m_score = 0;
+
+private:
+	void _createTable();
 
 public:
 	Player()
 	{
 		for (int i = 0; i < 5; i++)
 			m_dices.push_back( Dice{ i + 1 } );
+		_createTable();
 	}
 	~Player()
 	{
 	}
 	std::vector<Dice>& getDices() { return m_dices; }
 	const std::vector<Dice>& getDices() const { return m_dices; }
-	void unkeepAll();
+	std::map<std::string, Score> getScores(){ return m_scoreTable; }
+	const std::map<std::string, Score> getScores() const { return m_scoreTable; }
+	void earnScores(int scores, std::string combo);
 };
 
 #endif //PLAYER_H
