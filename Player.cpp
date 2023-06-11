@@ -26,5 +26,14 @@ void Player::earnScores(int scores, std::string combo)
 {
 	m_score += scores;
 	m_scoreTable.at(combo).score = scores;
+	m_scoreTable.at(combo).isFilled = true;
 }
 
+bool Player::isUpperSectionFilled() const
+{
+	int i = 0;
+	for (auto& dice : m_scoreTable)
+		if (dice.second.isFilled && dice.first != "Tk")
+			i++;
+	return (i == 6);
+}

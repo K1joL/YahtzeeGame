@@ -24,6 +24,9 @@ class Player
 		void keep() { m_isKeeped = true; }
 		void unkeep() { m_isKeeped = false; }
 		void roll();
+		bool operator==(const Dice& right) const { return this->getTop() == right.getTop(); }
+		bool operator<(const Dice& right) const { return this->getTop() < right.getTop(); }
+
 	};
 
 	struct Score
@@ -54,6 +57,7 @@ public:
 	std::map<std::string, Score> getScores(){ return m_scoreTable; }
 	const std::map<std::string, Score> getScores() const { return m_scoreTable; }
 	void earnScores(int scores, std::string combo);
+	bool isUpperSectionFilled() const;
 };
 
 #endif //PLAYER_H
