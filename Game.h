@@ -5,6 +5,8 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include <map>
+#include <algorithm>
 
 class Game
 {
@@ -26,6 +28,8 @@ class Game
 		MAX_COMBOS
 	};
 
+private:
+	std::map<std::string, Combo> m_comboMap;
 public:
 	Game()
 	{
@@ -35,8 +39,13 @@ public:
 	}
 	void showDices(const Player &p) const;
 	void keepDice(Player &p, const std::string &diceNumber);
+	void unkeepDice(Player& p, const std::string& diceNumber);
+	void unkeepAll(Player& p);
 	void rollDices(Player &p);
 	void showCombos();
+	bool isValidCombo(const Player& p, std::string combo);
+	void takeCombo(Player& p, std::string &combo);
+	bool isYahtzee(Player &p);
 };
 
 #endif //GAME_H
