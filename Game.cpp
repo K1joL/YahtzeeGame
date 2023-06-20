@@ -22,7 +22,7 @@ int firstSectionSum(const Player& p, int diceValue)
 	return sum;
 }
 
-bool sortByScores(Player& left, Player& right)
+bool sortByScores(const Player& left, const Player& right)
 {
 	return left.getScores() > right.getScores();
 }
@@ -44,16 +44,119 @@ void Game::initComboMap()
 	m_comboMap.emplace("Y", Yahtzee);
 }
 
-void Game::showScores(std::vector<Player> &pQueue)
+void Game::startGame()
+{
+	std::vector<Player> playerQueue;
+	cout << "Enter the number of players: " << endl;
+	int numberOfPlayers = 0;
+	cin >> numberOfPlayers;
+
+	for (int i = 0; i < numberOfPlayers; i++)
+		playerQueue.push_back(Player());
+	for (int round = 0; round < 13; round++)
+	{
+		for (int i = 0; i < playerQueue.size(); i++)
+		{
+			Player& currentPlayer = playerQueue[i];
+			cout << "Player " << i + 1 << " your turn." << endl;
+			int rollNum = 0;
+			while (rollNum < 4)
+			{
+				char action = ' ';
+				while (action != 'R' && action != 'K' && action != 'T' && action != 'U')
+				{
+					cout << "You can:" << endl;
+					if (rollNum < 3)
+						cout << "(R)oll" << endl;
+					if (rollNum != 0)
+						cout << "(T)ake a combo" << endl;
+					if (rollNum != 0)
+						cout << "(K)eep the dice" << endl;
+					if (currentPlayer.isOneKeeped())
+						cout << "(U)nkeep the dice" << endl;
+					cin >> action;
+					string diceNumber = "";
+					string combo = "";
+					switch (action)
+					{
+					case 'R':
+						rollDices(currentPlayer);
+						rollNum++;
+						break;
+
+					case 'K':
+						cout << "Enter the dice numbers you want to keep: ";
+						cin >> diceNumber;
+						keepDice(currentPlayer, diceNumber);
+						break;
+
+					case 'T':
+						showCombos();
+						cin >> combo;
+						if (isValidCombo(currentPlayer, combo))
+						{
+							if (isYahtzee(currentPlayer))
+								takeCombo(currentPlayer, combo, true);
+							else
+								takeCombo(currentPlayer, combo);
+						}
+						else
+						{
+							cout << "Something went wrong!" << endl;
+							cout << "Make sure that you can do this!" << endl;
+							break;
+						}
+
+						rollNum = 4; //End of turn
+						break;
+					case 'U':
+					{
+						char option;
+						do
+						{
+							cout << "Unkeep (A)ll dices!" << endl
+								<< "Unkeep (C)hosen dices!" << endl;
+							cin >> option;
+							switch (option)
+							{
+							case 'A':
+								unkeepAll(currentPlayer);
+								break;
+							case 'C':
+								cin >> diceNumber;
+								unkeepDice(currentPlayer, diceNumber);
+								break;
+							default:
+								cout << "Try again!" << endl;
+
+							}
+						} while (option != 'A' && option != 'C');
+						break;
+					}
+					default:
+						cout << "Try again!" << endl;
+					}
+					showScores(playerQueue);
+					showDices(currentPlayer);
+				}
+			}
+			unkeepAll(currentPlayer);
+		}
+	}
+	showScores(playerQueue);
+	whoWins(playerQueue);
+}
+
+void Game::showScores(const std::vector<Player> &pQueue) const
 {
 	for (int i = 0; i < pQueue.size(); i++)
 		cout << "Player " << i + 1 << ": " << pQueue[i].getScores() << endl;
 }
 
-void Game::whoWins(std::vector<Player>& pQueue)
+void Game::whoWins(const std::vector<Player>& pQueue) const
 {
-	sort(pQueue.begin(), pQueue.end(), sortByScores);
-	cout << "Player " << pQueue.begin()->getID() << " wins!";
+	const auto &winner = max_element(pQueue.begin(), pQueue.end(), sortByScores);
+	cout << "Player " << winner->getID() << " wins with scores: " << winner->getScores() << "!" << endl;
 }
 
 void Game::showDices(const Player &p) const
@@ -225,6 +328,5 @@ void Game::takeCombo(Player &p, std::string& combo, bool joker)
 bool Game::isYahtzee(Player& p)
 {
 	auto &dice = p.getDices();
-	for (int i = 0; i < dice.size(); i++)
-		return (count(dice.cbegin(), dice.cend(), dice[0].getTop()) == 5);
+	return (count(dice.cbegin(), dice.cend(), dice[0].getTop()) == 5);
 }
