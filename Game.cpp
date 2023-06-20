@@ -260,53 +260,59 @@ void Game::takeCombo(Player &p, std::string& combo, bool joker)
 		}
 		for (int i = 1; i <= 6; i++)
 			if (std::count(dice.cbegin(), dice.cend(), i) == 3)
+			{
 				for (int j = 1; j <= 6; j++)
-					if (i != j && std::count(dice.cbegin(), dice.cend(), i) == 2)
+					if (i != j && std::count(dice.cbegin(), dice.cend(), j) == 2)
+					{
 						scores = 25;
+						break;
+					}
+				break;
+			}
+
 		break;
 	case SmallStraight:
+	{
 		if (joker == true)
 		{
-			scores = 25;
+			scores = 30;
 			break;
 		}
 		sort(diceCopy.begin(), diceCopy.end());
-		for (int i = 0; i < 3; i++)
+		auto last = std::unique(diceCopy.begin(), diceCopy.end());
+		diceCopy.erase(last, diceCopy.end());
+		for (int i = 0; i < 2; i++)
 		{
 			int j = i;
-			while ((diceCopy[j + 1].getTop() - diceCopy[j].getTop()) == 1)
-			{
-				if (j < 3)
-					j++;
-				else break;
-			}
+			while (j < 3 && (diceCopy[j + 1].getTop() - diceCopy[j].getTop()) == 1)
+				j++;
 			if (j == 3)
 				scores = 30;
 			i++;
 		}
 		break;
-
+	}
 	case LargeStraight:
+	{
 		if (joker == true)
 		{
-			scores = 25;
+			scores = 40;
 			break;
 		}
 		sort(diceCopy.begin(), diceCopy.end());
-		for (int i = 0; i < 3; i++)
+		auto last = std::unique(diceCopy.begin(), diceCopy.end());
+		diceCopy.erase(last, diceCopy.end());
+		for (int i = 0; i < 1; i++)
 		{
 			int j = i;
-			while ((diceCopy[j + 1].getTop() - diceCopy[j].getTop()) == 1)
-			{
-				if (j < 4)
-					j++;
-				else break;
-			}
+			while (j < 4 && (diceCopy[j + 1].getTop() - diceCopy[j].getTop()) == 1)
+				j++;
 			if (j == 4)
 				scores = 40;
 			i++;
 		}
 		break;
+	}
 	case Chance:
 		scores = sumAllDice(p);
 		break;
