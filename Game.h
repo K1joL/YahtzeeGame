@@ -39,6 +39,8 @@ public:
 	~Game()
 	{
 	}
+	void showScores(std::vector<Player> &pQueue);
+	void whoWins(std::vector<Player> &pQueue);
 	void showDices(const Player &p) const;
 	void keepDice(Player &p, const std::string &diceNumber);
 	void unkeepDice(Player &p, const std::string& diceNumber);

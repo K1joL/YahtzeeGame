@@ -22,6 +22,11 @@ int firstSectionSum(const Player& p, int diceValue)
 	return sum;
 }
 
+bool sortByScores(Player& left, Player& right)
+{
+	return left.getScores() > right.getScores();
+}
+
 void Game::initComboMap()
 {
 	m_comboMap.emplace("O", Ones);
@@ -37,6 +42,18 @@ void Game::initComboMap()
 	m_comboMap.emplace("Ls", LargeStraight);
 	m_comboMap.emplace("CH", Chance);
 	m_comboMap.emplace("Y", Yahtzee);
+}
+
+void Game::showScores(std::vector<Player> &pQueue)
+{
+	for (int i = 0; i < pQueue.size(); i++)
+		cout << "Player " << i + 1 << ": " << pQueue[i].getScores() << endl;
+}
+
+void Game::whoWins(std::vector<Player>& pQueue)
+{
+	sort(pQueue.begin(), pQueue.end(), sortByScores);
+	cout << "Player " << pQueue.begin()->getID() << " wins!";
 }
 
 void Game::showDices(const Player &p) const
@@ -98,7 +115,7 @@ void Game::showCombos()
 
 bool Game::isValidCombo(const Player& p, std::string combo)
 {
-	auto &table = p.getScores();
+	auto &table = p.getScoresTable();
 	if (table.contains(combo))
 		if(!table.at(combo).isFilled)
 			return true;
@@ -191,7 +208,7 @@ void Game::takeCombo(Player &p, std::string& combo, bool joker)
 		scores = sumAllDice(p);
 		break;
 	case Yahtzee:
-		if(!p.getScores().at(combo).isFilled)
+		if(!p.getScoresTable().at(combo).isFilled)
 		{
 			if (isYahtzee(p))
 				scores = 50;
