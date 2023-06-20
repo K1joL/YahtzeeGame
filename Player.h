@@ -58,6 +58,7 @@ public:
 	const std::map<std::string, Score> getScores() const { return m_scoreTable; }
 	void earnScores(int scores, std::string combo);
 	bool isUpperSectionFilled() const;
+	bool isOneKeeped();
 };
 
 #endif //PLAYER_H

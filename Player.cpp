@@ -37,3 +37,11 @@ bool Player::isUpperSectionFilled() const
 			i++;
 	return (i == 6);
 }
+
+bool Player::isOneKeeped()
+{
+	for (auto& dice : m_dices)
+		if (dice.isKeeped())
+			return true;
+	return false;
+}
