@@ -54,8 +54,9 @@ public:
 	}
 	std::vector<Dice>& getDices() { return m_dices; }
 	const std::vector<Dice>& getDices() const { return m_dices; }
-	std::map<std::string, Score> getScores(){ return m_scoreTable; }
-	const std::map<std::string, Score> getScores() const { return m_scoreTable; }
+	std::map<std::string, Score> getScoresTable(){ return m_scoreTable; }
+	const std::map<std::string, Score> getScoresTable() const { return m_scoreTable; }
+	int getScores() const { return m_score; }
 	void earnScores(int scores, std::string combo);
 	bool isUpperSectionFilled() const;
 	bool isOneKeeped();
