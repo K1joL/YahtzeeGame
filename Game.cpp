@@ -93,14 +93,17 @@ bool Game::isValidCombo(const Player& p, std::string combo)
 	return false;
 }
 
-void Game::takeCombo(Player &p, std::string& combo)
+void Game::takeCombo(Player &p, std::string& combo, bool joker = false)
 {
 	Combo cmb = m_comboMap.at(combo);
 	auto diceCopy = p.getDices();
 	auto &dice = p.getDices();
 	int scores = 0;
 	if (cmb < 6)
+	{
 		scores = firstSectionSum(p, cmb);
+		return;
+	}
 	switch (cmb)
 	{
 	case ThreeOfAKind:
@@ -114,6 +117,11 @@ void Game::takeCombo(Player &p, std::string& combo)
 				scores = sumAllDice(p);
 		break;
 	case FullHouse:
+		if (joker == true)
+		{
+			scores = 25;
+			break;
+		}
 		for (int i = 1; i <= 6; i++)
 			if (std::count(dice.cbegin(), dice.cend(), i) == 3)
 				for (int j = 1; j <= 6; j++)
@@ -121,6 +129,11 @@ void Game::takeCombo(Player &p, std::string& combo)
 						scores = 25;
 		break;
 	case SmallStraight:
+		if (joker == true)
+		{
+			scores = 25;
+			break;
+		}
 		sort(diceCopy.begin(), diceCopy.end());
 		for (int i = 0; i < 3; i++)
 		{
@@ -138,6 +151,11 @@ void Game::takeCombo(Player &p, std::string& combo)
 		break;
 
 	case LargeStraight:
+		if (joker == true)
+		{
+			scores = 25;
+			break;
+		}
 		sort(diceCopy.begin(), diceCopy.end());
 		for (int i = 0; i < 3; i++)
 		{
@@ -162,8 +180,7 @@ void Game::takeCombo(Player &p, std::string& combo)
 			if (isYahtzee(p))
 				scores = 50;
 		}
-		else if (p.isUpperSectionFilled())
-			if (isYahtzee(p))
+		else if (isYahtzee(p))
 				scores = 100;
 		break;
 	default:

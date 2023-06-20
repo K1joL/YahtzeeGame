@@ -39,12 +39,12 @@ public:
 	}
 	void showDices(const Player &p) const;
 	void keepDice(Player &p, const std::string &diceNumber);
-	void unkeepDice(Player& p, const std::string& diceNumber);
-	void unkeepAll(Player& p);
+	void unkeepDice(Player &p, const std::string& diceNumber);
+	void unkeepAll(Player &p);
 	void rollDices(Player &p);
 	void showCombos();
 	bool isValidCombo(const Player& p, std::string combo);
-	void takeCombo(Player& p, std::string &combo);
+	void takeCombo(Player &p, std::string &combo, bool joker = false);
 	bool isYahtzee(Player &p);
 };
 
