@@ -30,9 +30,11 @@ class Game
 
 private:
 	std::map<std::string, Combo> m_comboMap;
+	void initComboMap();
 public:
 	Game()
 	{
+		initComboMap();
 	}
 	~Game()
 	{

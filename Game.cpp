@@ -22,7 +22,22 @@ int firstSectionSum(const Player& p, int diceValue)
 	return sum;
 }
 
-
+void Game::initComboMap()
+{
+	m_comboMap.emplace("O", Ones);
+	m_comboMap.emplace("Tw",Twos );
+	m_comboMap.emplace("Th", Threes);
+	m_comboMap.emplace("Fr", Fours);
+	m_comboMap.emplace("Fv", Fives);
+	m_comboMap.emplace("S", Sixes);
+	m_comboMap.emplace("Tk", ThreeOfAKind);
+	m_comboMap.emplace("Fk", FourOfAKind);
+	m_comboMap.emplace("Fh", FullHouse);
+	m_comboMap.emplace("Ss", SmallStraight);
+	m_comboMap.emplace("Ls", LargeStraight);
+	m_comboMap.emplace("CH", Chance);
+	m_comboMap.emplace("Y", Yahtzee);
+}
 
 void Game::showDices(const Player &p) const
 {
@@ -93,7 +108,7 @@ bool Game::isValidCombo(const Player& p, std::string combo)
 	return false;
 }
 
-void Game::takeCombo(Player &p, std::string& combo, bool joker = false)
+void Game::takeCombo(Player &p, std::string& combo, bool joker)
 {
 	Combo cmb = m_comboMap.at(combo);
 	auto diceCopy = p.getDices();
@@ -101,7 +116,7 @@ void Game::takeCombo(Player &p, std::string& combo, bool joker = false)
 	int scores = 0;
 	if (cmb < 6)
 	{
-		scores = firstSectionSum(p, cmb);
+		scores = firstSectionSum(p, cmb + 1);
 		return;
 	}
 	switch (cmb)
