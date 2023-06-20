@@ -54,7 +54,7 @@ public:
 	~Player()
 	{
 	}
-	int getID() { return m_id; }
+	int getID() const { return m_id; }
 	std::vector<Dice>& getDices() { return m_dices; }
 	const std::vector<Dice>& getDices() const { return m_dices; }
 	std::map<std::string, Score> getScoresTable(){ return m_scoreTable; }
