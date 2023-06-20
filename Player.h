@@ -38,6 +38,7 @@ private:
 	std::vector<Dice> m_dices;
 	std::map<std::string, Score> m_scoreTable;
 	int m_score = 0;
+	static int m_id;
 
 private:
 	void _createTable();
@@ -48,10 +49,12 @@ public:
 		for (int i = 0; i < 5; i++)
 			m_dices.push_back( Dice{ i + 1 } );
 		_createTable();
+		m_id++;
 	}
 	~Player()
 	{
 	}
+	int getID() { return m_id; }
 	std::vector<Dice>& getDices() { return m_dices; }
 	const std::vector<Dice>& getDices() const { return m_dices; }
 	std::map<std::string, Score> getScoresTable(){ return m_scoreTable; }
