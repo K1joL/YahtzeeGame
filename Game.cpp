@@ -117,6 +117,7 @@ void Game::takeCombo(Player &p, std::string& combo, bool joker)
 	if (cmb < 6)
 	{
 		scores = firstSectionSum(p, cmb + 1);
+		p.earnScores(scores, combo);
 		return;
 	}
 	switch (cmb)
