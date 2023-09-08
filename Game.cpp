@@ -159,18 +159,23 @@ void Game::whoWins(const std::vector<Player>& pQueue) const
 	cout << "Player " << winner->getID() << " wins with scores: " << winner->getScores() << "!" << endl;
 }
 
-void Game::showDices(const Player &p) const
+std::vector<int> Game::showDices(const Player &p) const
 {
 	int index = 0;
+	std::vector<int> diceScore;
+	diceScore.reserve(6);
+
 	for (auto &dice : p.getDices())
 	{
 		cout << index << " Dice - " << dice.getTop();
+		diceScore.push_back(dice.getTop());
 		if (dice.isKeeped())
 			cout << "\tkeeped";
 		cout << endl;
 		index++;
 	}
 	cout << endl;
+	return diceScore;
 }
 
 void Game::keepDice(Player &p, const std::string &diceNumber)

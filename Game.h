@@ -42,7 +42,7 @@ public:
 	void startGame();
 	void showScores(const std::vector<Player> &pQueue) const;
 	void whoWins(const std::vector<Player> &pQueue) const;
-	void showDices(const Player &p) const;
+	std::vector<int> showDices(const Player &p) const;
 	void keepDice(Player &p, const std::string &diceNumber);
 	void unkeepDice(Player &p, const std::string& diceNumber);
 	void unkeepAll(Player &p);
