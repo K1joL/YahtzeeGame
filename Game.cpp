@@ -29,19 +29,19 @@ bool sortByScores(const Player& left, const Player& right)
 
 void Game::initComboMap()
 {
-	m_comboMap.emplace("O", Ones);
-	m_comboMap.emplace("Tw",Twos );
-	m_comboMap.emplace("Th", Threes);
-	m_comboMap.emplace("Fr", Fours);
-	m_comboMap.emplace("Fv", Fives);
-	m_comboMap.emplace("S", Sixes);
-	m_comboMap.emplace("Tk", ThreeOfAKind);
-	m_comboMap.emplace("Fk", FourOfAKind);
-	m_comboMap.emplace("Fh", FullHouse);
-	m_comboMap.emplace("Ss", SmallStraight);
-	m_comboMap.emplace("Ls", LargeStraight);
-	m_comboMap.emplace("CH", Chance);
-	m_comboMap.emplace("Y", Yahtzee);
+	m_comboMap.emplace("Ones", Ones);
+	m_comboMap.emplace("Twos",Twos );
+	m_comboMap.emplace("Threes", Threes);
+	m_comboMap.emplace("Fours", Fours);
+	m_comboMap.emplace("Fives", Fives);
+	m_comboMap.emplace("Sixes", Sixes);
+	m_comboMap.emplace("ThreeOfAKind", ThreeOfAKind);
+	m_comboMap.emplace("FourOfAKind", FourOfAKind);
+	m_comboMap.emplace("FullHouse", FullHouse);
+	m_comboMap.emplace("SmallStraight", SmallStraight);
+	m_comboMap.emplace("LargeStraight", LargeStraight);
+	m_comboMap.emplace("Chance", Chance);
+	m_comboMap.emplace("Yahtzee", Yahtzee);
 }
 
 void Game::startGame()
