@@ -44,6 +44,23 @@ void Game::initComboMap()
 	m_comboMap.emplace("Yahtzee", Yahtzee);
 }
 
+void Game::initInvertComboMap()
+{
+	m_comboMap.emplace(Ones, "Ones");
+	m_comboMap.emplace(Twos, "Twos");
+	m_comboMap.emplace(Threes, "Threes");
+	m_comboMap.emplace(Fours, "Fours");
+	m_comboMap.emplace(Fives, "Fives");
+	m_comboMap.emplace(Sixes, "Sixes");
+	m_comboMap.emplace(ThreeOfAKind, "ThreeOfAKind");
+	m_comboMap.emplace(FourOfAKind, "FourOfAKind");
+	m_comboMap.emplace(FullHouse, "FullHouse");
+	m_comboMap.emplace(SmallStraight, "SmallStraight");
+	m_comboMap.emplace(LargeStraight, "LargeStraight");
+	m_comboMap.emplace(Chance, "Chance");
+	m_comboMap.emplace(Yahtzee, "Yahtzee");
+}
+
 void Game::startGame()
 {
 	std::vector<Player> playerQueue;

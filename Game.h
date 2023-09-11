@@ -30,11 +30,14 @@ class Game
 
 private:
 	std::map<std::string, Combo> m_comboMap;
+	std::map<Combo, std::string> m_invertComboMap;
 	void initComboMap();
+	void initInvertComboMap();
 public:
 	Game()
 	{
 		initComboMap();
+		initInvertComboMap();
 	}
 	~Game()
 	{
