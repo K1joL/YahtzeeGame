@@ -54,6 +54,7 @@ public:
 	bool isValidCombo(const Player& p, std::string combo);
 	void takeCombo(Player &p, std::string &combo, bool joker = false);
 	bool isYahtzee(Player &p);
+	const std::string& getComboName(int number);
 };
 
 #endif //GAME_H

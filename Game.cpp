@@ -358,3 +358,10 @@ bool Game::isYahtzee(Player& p)
 	auto &dice = p.getDices();
 	return (count(dice.cbegin(), dice.cend(), dice[0].getTop()) == 5);
 }
+
+const std::string& Game::getComboName(int number)
+{
+	
+	if (number < MAX_COMBOS)
+		return m_invertComboMap.find(static_cast<Combo>(number))->second;
+}
