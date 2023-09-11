@@ -46,19 +46,19 @@ void Game::initComboMap()
 
 void Game::initInvertComboMap()
 {
-	m_comboMap.emplace(Ones, "Ones");
-	m_comboMap.emplace(Twos, "Twos");
-	m_comboMap.emplace(Threes, "Threes");
-	m_comboMap.emplace(Fours, "Fours");
-	m_comboMap.emplace(Fives, "Fives");
-	m_comboMap.emplace(Sixes, "Sixes");
-	m_comboMap.emplace(ThreeOfAKind, "ThreeOfAKind");
-	m_comboMap.emplace(FourOfAKind, "FourOfAKind");
-	m_comboMap.emplace(FullHouse, "FullHouse");
-	m_comboMap.emplace(SmallStraight, "SmallStraight");
-	m_comboMap.emplace(LargeStraight, "LargeStraight");
-	m_comboMap.emplace(Chance, "Chance");
-	m_comboMap.emplace(Yahtzee, "Yahtzee");
+	m_invertComboMap.emplace(Ones, "Ones");
+	m_invertComboMap.emplace(Twos, "Twos");
+	m_invertComboMap.emplace(Threes, "Threes");
+	m_invertComboMap.emplace(Fours, "Fours");
+	m_invertComboMap.emplace(Fives, "Fives");
+	m_invertComboMap.emplace(Sixes, "Sixes");
+	m_invertComboMap.emplace(ThreeOfAKind, "ThreeOfAKind");
+	m_invertComboMap.emplace(FourOfAKind, "FourOfAKind");
+	m_invertComboMap.emplace(FullHouse, "FullHouse");
+	m_invertComboMap.emplace(SmallStraight, "SmallStraight");
+	m_invertComboMap.emplace(LargeStraight, "LargeStraight");
+	m_invertComboMap.emplace(Chance, "Chance");
+	m_invertComboMap.emplace(Yahtzee, "Yahtzee");
 }
 
 void Game::startGame()
