@@ -55,6 +55,7 @@ public:
 	void takeCombo(Player &p, std::string &combo, bool joker = false);
 	bool isYahtzee(Player &p);
 	const std::string& getComboName(int number);
+	const std::map<Combo, std::string>& getInvertComboMap() const { return m_invertComboMap; }
 };
 
 #endif //GAME_H
