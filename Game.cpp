@@ -365,3 +365,11 @@ const std::string& Game::getComboName(int number)
 	if (number < MAX_COMBOS)
 		return m_invertComboMap.find(static_cast<Combo>(number))->second;
 }
+
+std::map<int, std::string>& Game::getInvertComboMap()
+{
+	std::map<int, std::string> tmp;
+	for (int i = 0; i < MAX_COMBOS; i++)
+		tmp.emplace(i, m_invertComboMap.at(static_cast<Game::Combo>(i)));
+	return tmp;
+}
