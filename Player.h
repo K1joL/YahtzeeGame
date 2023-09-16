@@ -16,7 +16,7 @@ class Player
 		Dice(int top) : m_top{top}
 		{
 			//Random number generator for roll()
-			srand((unsigned)time(NULL));
+			//srand(time(0));
 		}
 		~Dice() {}
 		int getTop() const { return m_top; }
