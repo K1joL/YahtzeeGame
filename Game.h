@@ -49,6 +49,7 @@ public:
 	void keepDice(Player &p, const std::string &diceNumber);
 	void unkeepDice(Player &p, const std::string& diceNumber);
 	void unkeepAll(Player &p);
+	void keepSwitch(Player &p, const std::string& diceNumber);
 	void rollDices(Player &p);
 	void showCombos();
 	bool isValidCombo(const Player& p, std::string combo);

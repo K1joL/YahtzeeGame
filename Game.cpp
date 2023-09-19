@@ -219,6 +219,18 @@ void Game::unkeepAll(Player& p)
 		dice.unkeep();
 }
 
+void Game::keepSwitch(Player& p, const std::string& diceNumber)
+{
+	for (int i = 0; i < diceNumber.length(); i++)
+	{
+		int diceIndex = diceNumber[i] - '0';
+		if (p.getDices()[diceIndex].isKeeped())
+			p.getDices()[diceIndex].unkeep();
+		else
+			p.getDices()[diceIndex].keep();
+	}
+}
+
 void Game::rollDices(Player &p)
 {
 	for (auto& dice : p.getDices())
