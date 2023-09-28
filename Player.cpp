@@ -7,19 +7,19 @@ void Player::Dice::roll()
 
 void Player::_createTable()
 {
-	m_scoreTable.emplace("O", Score());
-	m_scoreTable.emplace("Tw", Score());
-	m_scoreTable.emplace("Th", Score());
-	m_scoreTable.emplace("Fr", Score());
-	m_scoreTable.emplace("Fv", Score());
-	m_scoreTable.emplace("S", Score());
-	m_scoreTable.emplace("Tk", Score());
-	m_scoreTable.emplace("Fk", Score());
-	m_scoreTable.emplace("Fh", Score());
-	m_scoreTable.emplace("Ss", Score());
-	m_scoreTable.emplace("Ls", Score());
-	m_scoreTable.emplace("CH", Score());
-	m_scoreTable.emplace("Y", Score());
+	m_scoreTable.emplace("Ones", Score());
+	m_scoreTable.emplace("Twos", Score());
+	m_scoreTable.emplace("Threes", Score());
+	m_scoreTable.emplace("Fours", Score());
+	m_scoreTable.emplace("Fives", Score());
+	m_scoreTable.emplace("Sixes", Score());
+	m_scoreTable.emplace("Three Of A Kind", Score());
+	m_scoreTable.emplace("Four Of A Kind", Score());
+	m_scoreTable.emplace("Full House", Score());
+	m_scoreTable.emplace("Small Straight", Score());
+	m_scoreTable.emplace("Large Straight", Score());
+	m_scoreTable.emplace("Chance", Score());
+	m_scoreTable.emplace("Yahtzee", Score());
 }
 
 void Player::earnScores(int scores, std::string combo)
@@ -46,4 +46,4 @@ bool Player::isOneKeeped()
 	return false;
 }
 
-int Player::m_id = 1;
+int Player::m_id = 0;
