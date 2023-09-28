@@ -46,4 +46,4 @@ bool Player::isOneKeeped()
 	return false;
 }
 
-int Player::m_id = 0;
+int Player::m_idGenerator = 0;

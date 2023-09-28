@@ -38,7 +38,8 @@ private:
 	std::vector<Dice> m_dices;
 	std::map<std::string, Score> m_scoreTable;
 	int m_score = 0;
-	static int m_id;
+	static int m_idGenerator;
+	int m_id;
 
 private:
 	void _createTable();
@@ -49,7 +50,8 @@ public:
 		for (int i = 0; i < 5; i++)
 			m_dices.push_back( Dice{ i + 1 } );
 		_createTable();
-		m_id++;
+		m_id = m_idGenerator;
+		m_idGenerator++;
 	}
 	~Player()
 	{
