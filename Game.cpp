@@ -365,6 +365,111 @@ void Game::takeCombo(Player &p, std::string& combo, bool joker)
 	p.earnScores(scores, combo);
 }
 
+int Game::getScoreForCombo(Player& p, const std::string& combo, bool joker)
+{
+	Combo cmb = m_comboMap.at(combo);
+	auto diceCopy = p.getDices();
+	auto& dice = p.getDices();
+	int scores = 0;
+	if (cmb < 6)
+	{
+		scores = firstSectionSum(p, cmb + 1);
+		p.earnScores(scores, combo);
+		return scores;
+	}
+	switch (cmb)
+	{
+	case ThreeOfAKind:
+		for (int i = 1; i <= 6; i++)
+			if (std::count(dice.cbegin(), dice.cend(), i) >= 3)
+				scores = sumAllDice(p);
+		break;
+	case FourOfAKind:
+		for (int i = 1; i <= 6; i++)
+			if (std::count(dice.cbegin(), dice.cend(), i) >= 4)
+				scores = sumAllDice(p);
+		break;
+	case FullHouse:
+		if (joker == true)
+		{
+			scores = 25;
+			break;
+		}
+		for (int i = 1; i <= 6; i++)
+			if (std::count(dice.cbegin(), dice.cend(), i) == 3)
+			{
+				for (int j = 1; j <= 6; j++)
+					if (i != j && std::count(dice.cbegin(), dice.cend(), j) == 2)
+					{
+						scores = 25;
+						break;
+					}
+				break;
+			}
+
+		break;
+	case SmallStraight:
+	{
+		if (joker == true)
+		{
+			scores = 30;
+			break;
+		}
+		sort(diceCopy.begin(), diceCopy.end());
+		auto last = std::unique(diceCopy.begin(), diceCopy.end());
+		diceCopy.erase(last, diceCopy.end());
+		if(diceCopy.size() >= 3)
+			for (int i = 0; i < 2; i++)
+			{
+				int j = i;
+				while (j < 3 && (diceCopy[j + 1].getTop() - diceCopy[j].getTop()) == 1)
+					j++;
+				if (j == 3)
+					scores = 30;
+				i++;
+			}
+		break;
+	}
+	case LargeStraight:
+	{
+		if (joker == true)
+		{
+			scores = 40;
+			break;
+		}
+		sort(diceCopy.begin(), diceCopy.end());
+		auto last = std::unique(diceCopy.begin(), diceCopy.end());
+		diceCopy.erase(last, diceCopy.end());
+		if(diceCopy.size() >= 4)
+			for (int i = 0; i < 1; i++)
+			{
+				int j = i;
+				while (j < 4 && (diceCopy[j + 1].getTop() - diceCopy[j].getTop()) == 1)
+					j++;
+				if (j == 4)
+					scores = 40;
+				i++;
+			}
+		break;
+	}
+	case Chance:
+		scores = sumAllDice(p);
+		break;
+	case Yahtzee:
+		if (!p.getScoresTable().at(combo).isFilled)
+		{
+			if (isYahtzee(p))
+				scores = 50;
+		}
+		else if (isYahtzee(p))
+			scores = 100;
+		break;
+	default:
+		cout << "Try Again!" << endl;
+	}
+	return scores;
+}
+
 bool Game::isYahtzee(Player& p)
 {
 	auto &dice = p.getDices();

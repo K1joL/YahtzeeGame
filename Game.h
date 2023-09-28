@@ -57,6 +57,7 @@ public:
 	bool isYahtzee(Player &p);
 	const std::string& getComboName(int number);
 	const std::map<int, std::string> getInvertComboMap() const;
+	int getScoreForCombo(Player& p, const std::string& combo, bool joker);
 };
 
 #endif //GAME_H
