@@ -262,7 +262,7 @@ bool Game::isValidCombo(const Player& p, std::string combo)
 	return false;
 }
 
-void Game::takeCombo(Player &p, std::string& combo, bool joker)
+void Game::takeCombo(Player &p, const std::string& combo, bool joker)
 {
 	Combo cmb = m_comboMap.at(combo);
 	auto diceCopy = p.getDices();
@@ -315,15 +315,16 @@ void Game::takeCombo(Player &p, std::string& combo, bool joker)
 		sort(diceCopy.begin(), diceCopy.end());
 		auto last = std::unique(diceCopy.begin(), diceCopy.end());
 		diceCopy.erase(last, diceCopy.end());
-		for (int i = 0; i < 2; i++)
-		{
-			int j = i;
-			while (j < 3 && (diceCopy[j + 1].getTop() - diceCopy[j].getTop()) == 1)
-				j++;
-			if (j == 3)
-				scores = 30;
-			i++;
-		}
+		if (diceCopy.size() >= 3)
+			for (int i = 0; i < 2; i++)
+			{
+				int j = i;
+				while (j < 3 && (diceCopy[j + 1].getTop() - diceCopy[j].getTop()) == 1)
+					j++;
+				if (j == 3)
+					scores = 30;
+				i++;
+			}
 		break;
 	}
 	case LargeStraight:
@@ -336,15 +337,16 @@ void Game::takeCombo(Player &p, std::string& combo, bool joker)
 		sort(diceCopy.begin(), diceCopy.end());
 		auto last = std::unique(diceCopy.begin(), diceCopy.end());
 		diceCopy.erase(last, diceCopy.end());
-		for (int i = 0; i < 1; i++)
-		{
-			int j = i;
-			while (j < 4 && (diceCopy[j + 1].getTop() - diceCopy[j].getTop()) == 1)
-				j++;
-			if (j == 4)
-				scores = 40;
-			i++;
-		}
+		if (diceCopy.size() >= 4)
+			for (int i = 0; i < 1; i++)
+			{
+				int j = i;
+				while (j < 4 && (diceCopy[j + 1].getTop() - diceCopy[j].getTop()) == 1)
+					j++;
+				if (j == 4)
+					scores = 40;
+				i++;
+			}
 		break;
 	}
 	case Chance:

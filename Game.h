@@ -53,7 +53,7 @@ public:
 	void rollDices(Player &p);
 	void showCombos();
 	bool isValidCombo(const Player& p, std::string combo);
-	void takeCombo(Player &p, std::string &combo, bool joker = false);
+	void takeCombo(Player &p, const std::string &combo, bool joker = false);
 	bool isYahtzee(Player &p);
 	const std::string& getComboName(int number);
 	const std::map<int, std::string> getInvertComboMap() const;
