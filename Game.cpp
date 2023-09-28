@@ -315,7 +315,7 @@ void Game::takeCombo(Player &p, const std::string& combo, bool joker)
 		sort(diceCopy.begin(), diceCopy.end());
 		auto last = std::unique(diceCopy.begin(), diceCopy.end());
 		diceCopy.erase(last, diceCopy.end());
-		if (diceCopy.size() >= 3)
+		if (diceCopy.size() >= 4)
 			for (int i = 0; i < 2; i++)
 			{
 				int j = i;
@@ -337,7 +337,7 @@ void Game::takeCombo(Player &p, const std::string& combo, bool joker)
 		sort(diceCopy.begin(), diceCopy.end());
 		auto last = std::unique(diceCopy.begin(), diceCopy.end());
 		diceCopy.erase(last, diceCopy.end());
-		if (diceCopy.size() >= 4)
+		if (diceCopy.size() >= 5)
 			for (int i = 0; i < 1; i++)
 			{
 				int j = i;
@@ -376,7 +376,6 @@ int Game::getScoreForCombo(Player& p, const std::string& combo, bool joker)
 	if (cmb < 6)
 	{
 		scores = firstSectionSum(p, cmb + 1);
-		p.earnScores(scores, combo);
 		return scores;
 	}
 	switch (cmb)
@@ -420,7 +419,7 @@ int Game::getScoreForCombo(Player& p, const std::string& combo, bool joker)
 		sort(diceCopy.begin(), diceCopy.end());
 		auto last = std::unique(diceCopy.begin(), diceCopy.end());
 		diceCopy.erase(last, diceCopy.end());
-		if(diceCopy.size() >= 3)
+		if(diceCopy.size() >= 4)
 			for (int i = 0; i < 2; i++)
 			{
 				int j = i;
@@ -442,7 +441,7 @@ int Game::getScoreForCombo(Player& p, const std::string& combo, bool joker)
 		sort(diceCopy.begin(), diceCopy.end());
 		auto last = std::unique(diceCopy.begin(), diceCopy.end());
 		diceCopy.erase(last, diceCopy.end());
-		if(diceCopy.size() >= 4)
+		if(diceCopy.size() >= 5)
 			for (int i = 0; i < 1; i++)
 			{
 				int j = i;
